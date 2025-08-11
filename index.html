@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDE Inter de América - Club de Fútbol</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 5px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .club-name {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #03a9f4;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.9), rgba(211, 47, 47, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231a237e" width="1200" height="600"/><circle fill="%23d32f2f" cx="200" cy="100" r="50" opacity="0.1"/><circle fill="%2303a9f4" cx="800" cy="200" r="80" opacity="0.1"/><circle fill="%23ffffff" cx="400" cy="400" r="60" opacity="0.05"/></svg>');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .hero-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .hero-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #d32f2f, #f44336);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(211, 47, 47, 0.3);
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1a237e;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #1a237e, #d32f2f);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Mission Vision Values */
+        .mvv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .mvv-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-top: 4px solid;
+        }
+
+        .mvv-card.mission {
+            border-top-color: #1a237e;
+        }
+
+        .mvv-card.vision {
+            border-top-color: #d32f2f;
+        }
+
+        .mvv-card.values {
+            border-top-color: #03a9f4;
+        }
+
+        .mvv-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .mvv-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a237e;
+        }
+
+        .mvv-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .values-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .values-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .values-list li::before {
+            content: '⚽';
+            position: absolute;
+            left: 0;
+            color: #d32f2f;
+        }
+
+        .values-list strong {
+            color: #1a237e;
+        }
+
+        /* History Section */
+        .history {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .history-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .history-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #1a237e, #d32f2f, #03a9f4);
+            transform: translateX(-50%);
+        }
+
+        .history-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .history-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .history-content {
+            flex: 1;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 0 2rem;
+            position: relative;
+        }
+
+        .history-year {
+            background: #1a237e;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .history-content h4 {
+            color: #1a237e;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Objectives */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .objective-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-bottom: 4px solid transparent;
+        }
+
+        .objective-card:nth-child(1) { border-bottom-color: #1a237e; }
+        .objective-card:nth-child(2) { border-bottom-color: #d32f2f; }
+        .objective-card:nth-child(3) { border-bottom-color: #1a237e; }
+        .objective-card:nth-child(4) { border-bottom-color: #d32f2f; }
+
+        .objective-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .objective-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .objective-card h4 {
+            color: #1a237e;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .objective-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 5px;
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #03a9f4;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-logos {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .mvv-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mvv-grid-values {
+                margin-top: 1rem;
+            }
+
+            .mvv-card.values {
+                max-width: none;
+            }
+
+            .history-timeline::before {
+                left: 20px;
+            }
+
+            .history-item {
+                flex-direction: column !important;
+                padding-left: 3rem;
+            }
+
+            .history-content {
+                margin: 0;
+            }
+
+            .objectives-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mvv-card,
+        .history-content,
+        .objective-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">
+                    <img src="logo-inter-america.png" alt="Inter de América">
+                </div>
+                <div class="logo">
+                    <img src="logo-ffm.png" alt="Federación de Fútbol de Madrid" onerror="this.style.display='none'; this.parentNode.innerHTML='FFM';">
+                </div>
+                <div class="club-name">CDE Inter de América</div>
+            </div>
+            <nav class="nav">
+                <a href="#inicio">Inicio</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#equipos">Equipos</a>
+                <a href="#noticias">Noticias</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <div class="hero-logos">
+                <div class="hero-logo">
+                    <img src="logo-inter-america.png" alt="Inter de América">
+                </div>
+                <div class="hero-logo">
+                    <img src="logo-ffm.png" alt="Federación de Fútbol de Madrid" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=&quot;font-weight:bold;color:#1a237e;font-size:0.9rem;text-align:center;&quot;>FFM</div>';">
+                </div>
+            </div>
+            <h1>CDE Inter de América</h1>
+            <p>Club de fútbol referente para la comunidad latinoamericana en Madrid</p>
+            <a href="#nosotros" class="cta-button">Conoce más sobre nosotros</a>
+        </div>
+    </section>
+
+    <!-- Nosotros Section -->
+    <section id="nosotros" class="section">
+        <div class="section-content">
+            <h2 class="section-title">Nosotros</h2>
+            
+            <!-- Mission, Vision, Values -->
+            <div class="mvv-grid">
+                <div class="mvv-card mission">
+                    <h3>🎯 Misión</h3>
+                    <p>Consolidarnos como un club de fútbol referente para la comunidad latinoamericana en Madrid, fomentando el desarrollo deportivo, la inclusión social y el crecimiento personal de nuestros jugadores.</p>
+                </div>
+                
+                <div class="mvv-card vision">
+                    <h3>🚀 Visión</h3>
+                    <p>Crear 1 equipo infantil y 1 equipo cadete para finales del 2027. Ascender dos categorías en las próximas 5 temporadas y alcanzar un reconocimiento destacado en el panorama futbolístico regional y nacional.</p>
+                </div>
+                
+            </div>
+            
+            <div class="mvv-grid-values">
+                <div class="mvv-card values">
+                    <h3>⭐ Valores</h3>
+                    <ul class="values-list">
+                        <li><strong>Inclusión:</strong> Igualdad de oportunidades para todos nuestros jugadores</li>
+                        <li><strong>Compromiso:</strong> Apoyo incondicional a jugadores y comunidad</li>
+                        <li><strong>Trabajo en equipo:</strong> Esfuerzo colectivo y colaboración</li>
+                        <li><strong>Espíritu deportivo:</strong> Respeto, competencia justa y dedicación</li>
+                        <li><strong>Identidad:</strong> Celebramos nuestra herencia latinoamericana</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Historia Section -->
+    <section class="section history">
+        <div class="section-content">
+            <h2 class="section-title">Nuestra Historia</h2>
+            
+            <div class="history-timeline">
+                <div class="history-item">
+                    <div class="history-content">
+                        <span class="history-year">2020</span>
+                        <h4>Atlético Caracas C.F.</h4>
+                        <p>Fundado en 2020 para ligas Amateur, dando los primeros pasos en el fútbol madrileño.</p>
+                    </div>
+                </div>
+                
+                <div class="history-item">
+                    <div class="history-content">
+                        <span class="history-year">2024</span>
+                        <h4>C.D.E. Inter de América</h4>
+                        <p>Refundación bajo el CIF G-19848274, perteneciente a la Comunidad de Madrid bajo el número de club 10573.</p>
+                    </div>
+                </div>
+                
+                <div class="history-item">
+                    <div class="history-content">
+                        <span class="history-year">2025</span>
+                        <h4>Federación de Madrid</h4>
+                        <p>Perteneciente a la Real Federación de Fútbol de Madrid bajo el número de club 5292. Temporada 25-26 en marcha.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Objetivos Section -->
+    <section class="section">
+        <div class="section-content">
+            <h2 class="section-title">Nuestros Objetivos</h2>
+            
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <span class="objective-icon">🏆</span>
+                    <h4>Fomentar el Talento</h4>
+                    <p>Desarrollar el talento, trabajo en equipo y espíritu deportivo para consolidarnos como club referente en Madrid.</p>
+                </div>
+                
+                <div class="objective-card">
+                    <span class="objective-icon">📈</span>
+                    <h4>Ascenso de Categorías</h4>
+                    <p>A través de la mejora conjunta del club, buscamos el ascenso de 2 categorías en las próximas 5 temporadas.</p>
+                </div>
+                
+                <div class="objective-card">
+                    <span class="objective-icon">💰</span>
+                    <h4>Reducir Costes</h4>
+                    <p>Facilitar el acceso al club reduciendo costes y ofreciendo becas a jugadores con necesidades económicas.</p>
+                </div>
+                
+                <div class="objective-card">
+                    <span class="objective-icon">🌎</span>
+                    <h4>Comunidad Latina</h4>
+                    <p>Crear una comunidad donde los aficionados latinoamericanos se sientan identificados y orgullosos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logos">
+                <div class="footer-logo">
+                    <img src="logo-inter-america.png" alt="Inter de América">
+                </div>
+                <div class="footer-logo">
+                    <img src="logo-ffm.png" alt="Federación de Fútbol de Madrid" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=&quot;font-weight:bold;color:#1a237e;font-size:0.8rem;&quot;>FFM</div>';">
+                </div>
+            </div>
+            <p>CDE Inter de América - Club de Fútbol</p>
+            <p>Real Federación de Fútbol de Madrid - Club Nº 5292</p>
+            <div class="social-links">
+                <a href="#">📘</a>
+                <a href="#">📷</a>
+                <a href="#">🐦</a>
+                <a href="#">📺</a>
+            </div>
+            <p>&copy; 2025 CDE Inter de América. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'linear-gradient(135deg, rgba(26, 35, 126, 0.95) 0%, rgba(40, 53, 147, 0.95) 100%)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #1a237e 0%, #283593 100%)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Animate cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.mvv-card, .history-content, .objective-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
